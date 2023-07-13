@@ -1,0 +1,772 @@
+// body {
+// 	color: #999;
+//     background: #eee;
+// }
+// .parent-step {
+// 	height: 100vh;
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+// }
+// :focus {
+// 	outline: none;
+// }
+// textarea {
+// 	resize: none;
+// }
+// input, textarea, select, button {
+// 	font-size: 14px;
+// }
+// select {
+// 	-moz-appearance: none;
+//     -webkit-appearance: none;
+//     cursor: pointer;
+//     option[value=""][disabled] {
+//  		display: none;
+//  	}
+// }
+// p, h1, h2, h3, h4, h5, h6, ul {
+// 	margin: 0;
+// }
+// ul {
+// 	padding: 0;
+// 	margin: 0;
+// 	list-style: none;
+// }
+// a {
+// 	text-decoration: none;
+// }
+// textarea {
+// 	resize: none;
+// }
+// img {
+// 	max-width: 100%;
+// 	vertical-align: middle;
+// }
+// .wrapper {
+// 	width: 826px;
+// 	height: 560px;
+// 	padding: 63px 90px 0;
+// 	background: #fff;
+// 	box-shadow: 3px 3px 12px 7px gray;
+// 	border-radius: 20px;
+// 	position: relative;
+// 	&::after {
+// 		content: "";
+// 		position: absolute;
+// 		top: -60px;
+// 		right: -100px;
+// 		width: 200px;
+// 		height: 200px;
+// 		border-radius: 50%;
+// 		background: radial-gradient(circle, rgba(91, 195, 177, .7), $second-color);
+
+// 	}
+// }
+// .wizard {
+//     position: relative;
+// 	.wizard-head {
+// 		font-size: 30px;
+// 		padding-bottom: 3rem;
+// 		color: #000;
+// 		text-transform: capitalize;
+// 		font-weight: 500;
+// 		position: relative;
+// 		font-family: Bukra-Medium;
+// 		&::after {
+// 			content: '';
+// 			position: absolute;
+// 			top: 47px;
+// 			left: 33%;
+// 			background: linear-gradient(to right, $second-color, $main-color);
+// 			width: 188px;
+// 			height: 3px;
+// 		}
+// 	}
+// }
+// .steps .current-info, .steps .number {
+//     display: none;
+// }
+// .steps {
+// 	display: none;
+// 	ul {
+// 		display: flex;
+// 		justify-content: center;
+// 		margin-bottom: 35px;
+// 		li {
+// 			margin-right: 10.8%;
+// 			position: relative;
+// 			&:last-child {
+// 				margin-right: 0;
+// 			}
+// 			.step-arrow {
+// 				position: absolute;
+// 				top: 33%;
+// 				left: 113%;
+// 				max-width: 57%;
+// 			}
+// 			.step-order {
+// 				display: block;
+// 				text-align: center;
+// 				text-transform: uppercase;
+// 				font-size: 12px;
+// 				color: #666;
+// 				margin-top: 14px;
+// 			}
+// 		}
+// 	}
+// }
+// h3 {
+// 	font-size: 20px;
+// 	color: #999;
+// 	text-transform: capitalize;
+// 	text-align: center;
+// 	letter-spacing: 2px;
+// 	margin-bottom: 29px;
+// 	font-weight: 900;
+// }
+// .form-row {
+// 	display: flex;
+// 	margin-bottom: 20px;
+// 	.form-holder {
+// 		width: 50%;
+// 		margin-right: 20px;
+// 		&:last-child {
+// 			margin-right: 0;
+// 		}
+// 		&.w-100 {
+// 			width: 100%;
+// 			margin-right: 0;
+// 		}
+// 	}
+// 	.form-group {
+// 		width: 50%;
+// 		display: flex;
+// 		.form-holder {
+// 			margin-right: 21px;
+// 			&:last-child {
+// 				margin-right: 0;
+// 			}
+// 		}
+// 	}
+// }
+// .form-holder {
+// 	position: relative;
+// 	i {
+// 		position: absolute;
+// 		top: 50%;
+// 		transform: translateY(-50%);
+// 		right: 20px;
+// 		font-size: 16px;
+// 		&.zmdi-eye {
+// 			cursor: pointer;
+// 		}
+// 	}
+// }
+// .form-control {
+// 	height: 42px;
+// 	border: 1px solid #e6e6e6;
+// 	width: 100%;
+// 	background: none;
+// 	padding: 0 35px 0 19px;
+// 	color: #999;
+// 	&:focus {
+// 		border-color: #8eb852;
+// 	}
+// 	&::-webkit-input-placeholder {
+// 		color: #999;
+// 	}
+// 	&::-moz-placeholder {
+// 		color: #999;
+// 	}
+// 	&:-ms-input-placeholder {
+// 		color: #999;
+// 	}
+// 	&:-moz-placeholder {
+// 		color: #999;
+// 	}
+// }
+// .actions {
+// 	margin-top: 30px;
+// 	ul {
+// 		display: flex;
+// 		justify-content: space-between;
+// 		&.step-4 {
+// 			justify-content: center;
+// 			li:first-child {
+// 				display: none;
+// 			}
+// 		}
+// 	}
+// 	li {
+// 		transition: all .3s linear;
+
+// 		a {
+// 			border: none;
+// 			display: inline-flex;
+// 			height: 42px;
+// 			width: 132px;
+// 			align-items: center;
+// 			color: #000;
+// 			cursor: pointer;
+// 			background: linear-gradient(to right, $second-color, transparent);
+// 			text-transform: uppercase;
+// 			justify-content: center;
+// 			letter-spacing: 1px;
+// 			font-size: 15px;
+// 			border-radius: 3px;
+// 			transition: all .3s linear;
+// 			&:hover {
+// 				transition: all .3s linear;
+// 				background: $second-color;
+
+// 			}
+// 		}
+// 		&:first-child {
+// 			a {
+// 				width: 97px;
+// 			}
+// 		}
+// 		&:last-child {
+// 			a {
+// 				width: 234px;
+// 			}
+// 		}
+// 	}
+// }
+// table.cart {
+// 	width: 100%;
+// 	font-size: 15px;
+// 	margin-bottom: 17px;
+// 	th {
+// 		color: #666;
+// 		padding: 9px 0;
+// 		border-bottom: 1px solid #e6e6e6;
+// 	}
+// 	td {
+// 		padding: 13px 0;
+// 		border-bottom: 1px solid #e6e6e6;
+// 	}
+// 	tr:last-child {
+// 		td {
+// 			border: none;
+// 		}
+// 		td {
+// 			padding-bottom: 0;
+// 		}
+// 	}
+// 	.item-thumb {
+// 		display: inline-block;
+// 		border: 1px solid #e6e6e6;
+// 	}
+// 	.product-thumb {
+// 		width: 17.49%;
+// 	}
+// 	.product-detail {
+// 		width: 22.45%;
+// 		a {
+// 			color: #666;
+// 			display: block;
+// 			margin-bottom: 6px;
+// 		}
+// 		span {
+// 			color: #999;
+
+// 		}
+// 	}
+// 	.product-quantity {
+// 		width: 16.25%;
+// 		.quantity {
+// 			display: inline-block;
+// 			width: 105px;
+// 			height: 36px;
+// 			background: #f2f2f2;
+// 			display: flex;
+// 			align-items: center;
+// 			justify-content: center;
+// 		}
+// 		span {
+// 			cursor: pointer;
+// 			display: inline-block;
+// 			flex-grow: 1;
+// 			height: 100%;
+// 			display: flex;
+// 			align-items: center;
+// 			justify-content: center;
+// 		}
+// 		input {
+// 			border: none;
+// 			padding: 0;
+// 			width: 17px;
+// 			font-size: 15px;
+// 			color: #666;
+// 			background: none;
+// 			text-align: center;
+// 			&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+// 				-webkit-appearance: none;
+// 			}
+// 		}
+// 	}
+// 	.total-price {
+// 		width: 39.78%;
+// 		span {
+// 			color: #92c752;
+// 			font-weight: 700;
+// 		}
+// 		text-align: center;
+// 	}
+// 	.product-remove {
+// 		width: 4.03%;
+// 		text-align: right;
+// 		a {
+// 			color: #666;
+// 		}
+
+// 	}
+// }
+// .cart_totals {
+// 	font-size: 15px;
+// 	color: #666;
+// 	width: 66.56%;
+// 	margin: auto;
+// 	margin-bottom: 31px;
+// 	table {
+// 		width: 100%;
+// 	}
+// 	th, td {
+// 		padding: 11px 0;
+// 		vertical-align: top;
+// 		text-align: left;
+// 	}
+// 	th {
+// 		color: #333;
+// 		text-align: left;
+// 		width: 65.81%;
+// 		span {
+// 			color: #999;
+// 			font-size: 14px;
+// 		}
+// 	}
+// 	.order-total {
+// 		th, td {
+// 			padding: 12px 0;
+// 			color: #333;
+// 		}
+// 	}
+// }
+// .checkbox {
+// 	label {
+// 		padding-left: 21px;
+// 		cursor: pointer;
+// 		display: block;
+// 		position: relative;
+// 		margin-bottom: 13px;
+
+// 	}
+// 	input {
+// 		position: absolute;
+// 	    opacity: 0;
+// 	    cursor: pointer;
+// 	}
+// 	input:checked ~ .checkmark:after {
+// 		display: block;
+// 	}
+// 	.checkmark {
+// 		position: absolute;
+// 	    top: 3px;
+// 	    left: 0;
+// 	    height: 13px;
+// 	    width: 13px;
+// 	    border-radius: 50%;
+// 	    border: 1px solid #999;
+// 		&:after {
+// 		    content: "";
+// 	    	top: 2px;
+// 			left: 2px;
+// 			width: 7px;
+// 			height: 7px;
+// 			border-radius: 50%;
+// 			background: #999;
+// 			position: absolute;
+// 			display: none;
+// 		}
+// 	}
+// }
+// textarea {
+// 	width: 100%;
+// 	height: 200px !important;
+// 	resize: none;
+// }
+// @media (max-width: 1500px) {
+
+// }
+// @media (max-width: 1199px) {
+
+// }
+// @media (max-width: 991px) {
+// 	.steps ul li .step-arrow {
+// 		top: 45%;
+// 		left: 102%;
+// 	}
+// 	.cart_totals {
+// 		width: 74%;
+// 	}
+// }
+// @media (max-width: 767px) {
+// 	body {
+// 		background: none;
+// 		height: auto;
+// 		display: block;
+// 	}
+// 	.steps ul li .step-arrow {
+// 		top: 35%;
+// 	}
+// 	.wrapper {
+// 		width: auto;
+// 		padding: 0;
+// 		height: auto;
+
+// 	}
+// 	.wizard {
+// 	    height: auto;
+// 	    padding: 40px 20px 20px;
+// 	}
+// 	.form-row {
+// 		display: block;
+// 		.form-holder {
+// 			width: 100%;
+// 			margin-right: 0;
+// 			margin-bottom: 25px;
+// 		}
+// 		.form-group {
+// 			width: 100%;
+// 			display: block;
+// 		}
+// 	}
+// 	.actions ul {
+// 		flex-direction: column;
+// 		align-items: flex-end;
+// 		li {
+// 			margin-bottom: 20px;
+// 		}
+// 	}
+// 	.cart_totals {
+// 		width: 100%;
+// 		.shipping {
+// 			th, td {
+// 				display: block;
+// 				text-align: left;
+// 			}
+// 		}
+// 		td {
+// 			text-align: right;
+// 		}
+// 		th {
+// 			width: 80%;
+// 		}
+// 	}
+// 	table.cart {
+// 		th {
+// 			display: none;
+// 		}
+// 		td {
+// 			display: flex;
+// 			align-items: center;
+// 			justify-content: space-between;
+// 			border: none;
+// 			&:before {
+// 				content: attr(data-title);
+// 			    font-weight: 700;
+// 			    color: #333;
+// 			}
+// 		}
+// 		.product-thumb, .product-detail, .product-quantity, .total-price, .product-remove {
+// 			width: 100%;
+// 		}
+// 		.product-thumb, .product-remove {
+// 			justify-content: center;
+// 		}
+// 		tr {
+// 			&:first-child {
+// 				td:last-child {
+// 					padding-bottom: 30px;
+// 				}
+// 			}
+// 			&:last-child td {
+// 				padding-bottom: 13px;
+// 				&:first-child {
+// 					padding-top: 30px;
+// 					border-top: 1px solid #e6e6e6;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+@import "../../layout/global";
+@import "../../layout/navbar";
+@import "../../layout/footer";
+@import "../../layout/fixed.social";
+
+body {
+	background-color: #eee;
+}
+
+.parent-step {
+  display: none;
+}
+
+.career {
+	.career-row {
+		position: relative;
+		&::after {
+			content: "";
+			position: absolute;
+			top: 75px;
+			left: 0;
+			width: 100%;
+			height: 200px;
+			background: url(../../../images/career-bg.webp) top center no-repeat;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 12%;
+			left: 0;
+			width: 100%;
+			height: 200px;
+			background: url(../../../images/career-bg.webp) top center no-repeat;
+		}
+	}
+  .head {
+    h4 {
+      @extend %headsection;
+	  background: -webkit-linear-gradient($main-color 50%, #5a5555);
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+    }
+
+    span {
+      color: $p-color;
+    }
+  }
+
+  .career-card {
+	
+    .parent-career {
+      .box {
+        padding: 20px;
+        background: white;
+        position: relative;
+        border-radius: 10px;
+		box-shadow: 0px 0px 5px 2px $main-color;
+
+        img {
+          position: absolute;
+          right: -10px;
+          top: -50px;
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+          border: 7px solid #eee;
+          object-fit: cover;
+        }
+
+        h3 {
+          font-size: 30px;
+          font-weight: 600;
+          color: $main-color;
+          letter-spacing: 2px;
+          text-transform: capitalize;
+        }
+
+        span {
+          font-style: italic;
+          letter-spacing: 1px;
+          color: #000;
+          text-transform: capitalize;
+        }
+      ul {
+		li {
+			text-transform: capitalize;
+			margin-bottom: 15px;
+			font-family: Bukra-Light;
+			color: $p-color;
+		}
+	  }
+      }
+    }
+  }
+}
+
+
+
+
+//accordion Question
+
+ .head-accordion {
+	.heading-primary {
+		font-size:2em;
+		padding:2em;
+		text-align:center;
+		font-family: Bukra-Bold;
+	}
+ }
+  .accordion dl,
+  .accordion-list {
+	 border:1px solid #ddd;
+	 
+  }
+  .accordion dd,
+  .accordion__panel {
+	 background-color:#fff;
+	 font-size:1em;
+	 line-height:1.5em; 
+  }
+  .accordion p {
+	padding:1em 2em 1em 2em;
+	line-height: 30px;
+	color: $p-color;
+  }
+  
+  .accordion {
+	  position:relative;
+	  background-color:#fff;
+  }
+
+  .accordionTitle {
+	&:hover {
+		color: #000;
+	}
+  }
+  .accordionTitle,
+  .accordion__Heading {
+   background-color:$second-color; 
+	 text-align:center;
+	   font-weight:700; 
+			padding:2em;
+			display:block;
+			text-decoration:none;
+			color:#fff;
+			transition:background-color 0.5s ease-in-out;
+	border-bottom:1px solid $second-color;
+	&:before {
+	 content: "+";
+	 font-size:1.5em;
+	 line-height:0.5em;
+	 float:left; 
+	 transition: transform 0.3s ease-in-out;
+	}
+	&:hover {
+		background-color: rgba(90,194,176, .7);
+
+	}
+  }
+  .accordionTitleActive, 
+  .accordionTitle.is-expanded {
+	 background-color:$second-color;
+	  &:before {
+	   
+		transform:rotate(-225deg);
+	  }
+  }
+  .accordionItem { 
+	  height:auto;
+	  overflow-y:scroll; 
+	  //SHAME: magic number to allow the accordion to animate
+	  
+	   max-height:50em;
+	  transition:max-height 1s;   
+   
+	  
+	  @media screen and (min-width:48em) {
+		   max-height:15em;
+		  transition:max-height 0.5s
+		  
+	  }
+	  
+	 
+  }
+   
+  .accordionItem.is-collapsed {
+	  max-height:0;
+  }
+  .no-js .accordionItem.is-collapsed {
+	max-height: auto;
+  }
+  .animateIn {
+	   animation: accordionIn 0.45s normal ease-in-out both 1; 
+  }
+  .animateOut {
+	   animation: accordionOut 0.45s alternate ease-in-out both 1;
+  }
+  @keyframes accordionIn {
+	0% {
+	  opacity: 0;
+	  transform:scale(0.9) rotateX(-60deg);
+	  transform-origin: 50% 0;
+	}
+	100% {
+	  opacity:1;
+	  transform:scale(1);
+	}
+  }
+  
+  @keyframes accordionOut {
+	  0% {
+		 opacity: 1;
+		 transform:scale(1);
+	   }
+	   100% {
+			opacity:0;
+			 transform:scale(0.9) rotateX(-60deg);
+		 }
+  }
+
+
+  //mediaQuery
+
+  @media screen and (max-width:991px) {
+	.career {
+		.career-card {
+			margin: unset !important;
+			img {
+				border: 9px solid #eee !important;
+			}
+		}
+		.during-interview {
+			transform: translateY(-70px);
+		}
+	}
+	.career .career-row::before , .career .career-row::after {
+		display: none;
+	}
+  }
+  @media screen and (max-width:768px) {
+	.accordionItem {
+		max-height: 14em;
+	}
+	.head-accordion .heading-primary {
+		font-size: 1.5em;
+		padding: unset;
+		padding-bottom: 2em;
+	}
+	.accordion p {
+		font-size: 15px;
+	}
+  }
+@media screen and (max-width:575px) {
+	.career .career-card .parent-career .box ul li {
+		font-size: 15px;
+	}
+}
+  @media screen and (max-width:500px) {
+	.career .career-card .parent-career .box h3 {
+		font-size: 20px;
+	}
+  }
+  @media screen and (max-width:390px) {
+	.career .career-card .parent-career .box h3 {
+		font-size: 16px;
+	}
+  }
