@@ -48,6 +48,7 @@ class TeacherController extends Controller
             'active'=> 1,
             'normal'=> $request->normal,
             'number_of_students'=> $request->number_of_students,
+            'remain'=> $request->number_of_students,
         ]);
 
         return redirect()->route('get_all_teachers')->with('alert-success','تم حفظ البيانات بنجاح');
@@ -55,10 +56,10 @@ class TeacherController extends Controller
 
 
 
-    /*** store Teacher ***/
-    public function softDelete($id)
+    /*** forceDelete Teacher ***/
+    public function forceDelete($id)
     {
-        $teacher = Teacher::findOrFail($id)->delete();
+        $teacher = Teacher::query()->findOrFail($id)->forceDelete();
         return redirect()->route('get_all_teachers')->with('alert-danger','تم حذف البيانات بنجاح');
     }
 
@@ -123,6 +124,8 @@ class TeacherController extends Controller
         if ($request->normal == 2)
         {
             $teacher->number_of_students = $request->number_of_students;
+            $teacher->remain = $request->number_of_students;
+
         }else{
             $teacher->number_of_students = null;
         }

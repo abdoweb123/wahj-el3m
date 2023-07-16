@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Video extends Model
+class Student extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'path', 'teacher_id','course_id', 'active',];
+    protected $fillable = ['name', 'email', 'password', 'teacher_id', 'active',];
 
 
 
@@ -22,16 +22,13 @@ class Video extends Model
     }
 
 
-    public function course()
+
+    public function courses()
     {
-        return $this->belongsTo(Course::class,'course_id');
+        return $this->belongsToMany(Course::class,'student_courses','student_id','course_id');
     }
 
 
-    public function pdfs()
-    {
-        return $this->hasMany(PdfVideo::class,'video_id');
-    }
     /*** end relations ***/
 
 

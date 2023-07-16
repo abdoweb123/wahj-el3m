@@ -10,7 +10,6 @@
 
 <style>
     select{padding:10px !important;}
-    #numberOfStudents_row{display: none}
 </style>
 
 @endsection
@@ -53,7 +52,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label class="mr-sm-2">إمكانية التحميل: </label>
-                                    <select id="normal" class="form-control mr-sm-2 p-2 mr-md-0" name="download">
+                                    <select class="form-control mr-sm-2 p-2 mr-md-0" name="download">
                                         <option class="custom-select mr-sm-2 p-2" value="2" {{old('download') == 2 ? 'selected' : ''}}>لا يمكن</option>
                                         <option class="custom-select mr-sm-2 p-2" value="1" {{old('download') == 1 ? 'selected' : ''}}>يمكن</option>
                                     </select>
@@ -62,7 +61,9 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="name_ar" class="mr-sm-2">الوصف</label>
-                                    <textarea name="description" class="form-control" rows="6"></textarea>
+                                    <textarea name="description" class="form-control" rows="6">
+                                        {{old('description')}}
+                                    </textarea>
                                 </div>
                             </div>
 
@@ -89,24 +90,14 @@
     <script>
         $(document).ready(function(){
             $(".alert").delay(5000).slideUp(300);
-
-            $('#normal').change(function (){
-               if ($(this).val() === '2') {
-                   $('#numberOfStudents_row').slideDown();
-               }
-               else {
-                   $('#numberOfStudents_row').slideUp();
-                   $('#numberOfStudents_row input').val('');
-               }
-            });
         });
 
 
 
-        // validation of the form
-        function validateForm() {
-
-        }
+        // // validation of the form
+        // function validateForm() {
+        //
+        // }
 
 
 

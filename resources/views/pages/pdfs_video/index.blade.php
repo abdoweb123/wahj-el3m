@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    قائمة الكورسات
+    قائمة المستندات
 @stop
 
 @section('style')
@@ -27,6 +27,21 @@
 @section('content')
     <!-- row -->
     <div class="row">
+
+        <div class="row w-100 justify-content-between">
+           <div class="col">
+               <h5 style="margin-right:20px; color:#1a1ac3;">
+                   <span> الكورسات </span> <span>/</span>  <span> الفيديوهات </span> <span>/</span>  <span> المستندات </span>
+               </h5>
+           </div>
+
+            <div class="col">
+               <h5 style="margin-right:20px; color:#1a1ac3; text-align: end">
+                   <span> {{$video->name}} </span>
+               </h5>
+           </div>
+        </div>
+
         <div class="col-xl-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
@@ -51,9 +66,9 @@
                     @endforeach
 
 
-                    <a href="{{route('courses.create')}}" class="button x-small">
-                        إضافة كورس
-                    </a>
+                        <a href="{{route('pdfs_video_create',$video->id)}}" class="button x-small">
+                            إضافة مستند
+                        </a>
                     <br><br>
 
                     <div class="table-responsive">
@@ -63,64 +78,52 @@
                             <tr>
                                 <th>#</th>
                                 <th>الاسم</th>
+                                <th>نسخ المسار</th>
                                 <th>الحالة</th>
                                 <th>الإجراءات</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($courses as $item)
+                            @foreach ($pdfs_video as $item)
                                 <tr>
 
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td id="copy_td">
+                                        <span style="display: none" id="link_to_be_copied">{{asset('/storage/videos/'.$item->path)}}</span>
+                                        <span class="d-block btn btn-sm w-50 m-auto copy_link" style="border: 1px solid #8ee290; margin-top: 5px !important;">
+                                          <i class="fa fa-copy"></i>&nbsp;نسخ
+                                        </span>
+                                        <span class="d-block text-center say_copied" style="color:#b04a4a; visibility:hidden;">تم النسخ!</span>
+                                    </td>
                                     <td>@if($item->active == 1)
-                                            <a class="btn btn-primary" href="{{route('change_status_course',$item->id)}}">نشط</a>
+                                            <a class="btn btn-primary" href="{{route('change_status_pdfs_video',$item->id)}}">نشط</a>
                                         @else
-                                            <a class="btn btn-danger" href="{{route('change_status_course',$item->id)}}">غير نشط</a>
+                                            <a class="btn btn-danger" href="{{route('change_status_pdfs_video',$item->id)}}">غير نشط</a>
                                         @endif
                                     </td>
 {{--                                    <td>@isset($item->admin->name)  {{ $item->admin->name }} @else _____  @endisset</td>--}}
 
+
                                     <td>
-                                        <div class="dropdown show">
-                                            <a class="btn btn-success btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                العمليات
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a href="{{route('pdfs_video_show',$item->id)}}" class="process" style="cursor:pointer">
+                                            <i style="color:green; font-size:18px;" class="fa fa-eye"></i></a>
 
-
-                                                <a class="dropdown-item" href="{{route('courses.show',$item->id)}}">
-                                                    <i style="color: #457245" class="fa fa-eye"></i>&nbsp عرض</a>
-
-                                                <a class="dropdown-item" href="{{route('courses.edit',$item->id)}}">
-                                                    <i style="color: #ffc107" class="fa fa-edit"></i>&nbsp تعديل</a>
-
-                                                <a class="dropdown-item" type="button" href="#"
-                                                   data-toggle="modal" data-target="#delete{{ $item->id }}">
-                                                    <i style="color: red" class="fa fa-trash"></i>&nbsp حذف</a>
-
-                                                <a class="dropdown-item" href="{{route('videos_index',$item->id)}}">
-                                                    <i style="color: #25bb19" class="fa fa-video"></i>&nbsp; فيديوهات الكورس </a>
-
-                                                <a class="dropdown-item" href="{{route('pdfs_course_index',$item->id)}}">
-                                                    <i style="color: #acabcb" class="fa fa-file-pdf-o"></i>&nbsp;مستندات الشرح  </a>
-
-                                                <a class="dropdown-item" href="{{route('intro_videos_index',$item->id)}}">
-                                                    <i style="color: #acabcb" class="fa fa-star"></i>&nbsp; الفيديو التعريفي </a>
-
-                                            </div>
-                                        </div>
+                                        <a type="button" class="process" style="cursor:pointer" data-toggle="modal"
+                                           data-target="#delete{{ $item->id }}">
+                                            <i style="color:red; font-size:18px;" class="fa fa-trash"></i></a>
                                     </td>
+
                                 </tr>
 
                                 <!--  page of delete_modal_city -->
-                                @include('pages.courses.delete')
+                                @include('pages.pdfs_video.delete')
 
 
                             @endforeach
                         </table>
 
-                        <div> {{$courses->links('pagination::bootstrap-4')}}</div>
+                        <div> {{$pdfs_video->links('pagination::bootstrap-4')}}</div>
                     </div>
                 </div>
             </div>
@@ -138,6 +141,25 @@
         $(document).ready(function(){
             $(".alert").delay(5000).slideUp(300);
         });
+
+
+
+        $('.copy_link').click(function (){
+
+            var copyText = $(this).parent().children(':first').prop('innerText');
+
+            navigator.clipboard.writeText(copyText);
+
+            // show copied
+            $(this).next().css('visibility','visible');
+            setTimeout(function (){
+                $('.say_copied').css('visibility','hidden');
+            },2000);
+        });
+
+
+
+
     </script>
 @endsection
 

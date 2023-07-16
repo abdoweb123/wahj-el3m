@@ -11,7 +11,7 @@ class Teacher extends \Illuminate\Foundation\Auth\User
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'email', 'password', 'type', 'active', 'normal', 'number_of_students'];
+    protected $fillable = ['name', 'email', 'password', 'type', 'active', 'normal', 'number_of_students', 'remain'];
 
 
 

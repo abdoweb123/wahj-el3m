@@ -4,23 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePdfCoursesTable extends Migration
+class CreateStudentCoursesTable extends Migration
 {
-     /***  Run the migrations. ***/
+    /***  Run the migrations. ***/
     public function up()
     {
-        Schema::create('pdf_courses', function (Blueprint $table) {
+        Schema::create('student_courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('path');
-            $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('course_id');
-            $table->boolean('active')->default(1); // 1-active  2-inactive
             $table->softDeletes();
             $table->timestamps();
 
-
-            $table->foreign('teacher_id')->references('id')->on('teachers')
+            $table->foreign('student_id')->references('id')->on('students')
                 ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('course_id')->references('id')->on('courses')
@@ -28,9 +24,12 @@ class CreatePdfCoursesTable extends Migration
         });
     }
 
-   /***  Reverse the migrations. ***/
+
+
+
+     /***  Reverse the migrations. ***/
     public function down()
     {
-        Schema::dropIfExists('pdf_courses');
+        Schema::dropIfExists('student_courses');
     }
 }

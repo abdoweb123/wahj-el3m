@@ -26,6 +26,22 @@ class CourseController extends Controller
 
 
 
+    /*** edit Page ***/
+    public function edit(Course $course)
+    {
+        return view('pages.courses.edit',compact('course'));
+    }
+
+
+
+    /*** show Page ***/
+    public function show(Course $course)
+    {
+        return view('pages.courses.show',compact('course'));
+    }
+
+
+
     /*** store country ***/
     public function store(Request $request)
     {
@@ -59,17 +75,20 @@ class CourseController extends Controller
     /*** update country ***/
     public function update(Request $request, Course $course)
     {
-//        return $course;
-
         $request->validate([
             'name'=>'required',
+            'end_date'=>'required',
         ],
             [
                 'name.required'=>' الاسم مطلوب',
+                 'end_date.required'=>' تاريخ الانتهاء مطلوب',
             ]
         );
 
         $course->name = $request->name;
+        $course->end_date = $request->end_date;
+        $course->download = $request->download;
+        $course->description = $request->description;
         $course->save();
         return redirect()->route('courses.index')->with('alert-info','تم تعديل البيانات بنجاح');
     }

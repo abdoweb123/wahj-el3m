@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\IntroVideoController;
 use App\Http\Controllers\PdfCourseController;
+use App\Http\Controllers\PdfVideoController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +54,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
                 Route::get('/get/all', [TeacherController::class,'index'])->name('get_all_teachers');
                 Route::get('/create/page', [TeacherController::class,'create'])->name('create_teacher_page');
                 Route::post('/store', [TeacherController::class,'store'])->name('store_teacher');
-                Route::post('/soft/delete/{id}', [TeacherController::class,'softDelete'])->name('soft_delete');
+                Route::get('/force/delete/{id}', [TeacherController::class,'forceDelete'])->name('force_delete_teacher');
                 Route::get('/show/{id}', [TeacherController::class,'show'])->name('show_teacher_data');
                 Route::post('/update/system', [TeacherController::class,'updateSystem'])->name('update_teacher_system');
                 Route::get('/change/status/{id}', [TeacherController::class,'changeStatus'])->name('change_status');
@@ -106,17 +108,42 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
             {
                 Route::get('index/{course_id}', [PdfCourseController::class,'index'])->name('pdfs_course_index');
                 Route::get('create/{course_id}', [PdfCourseController::class,'create'])->name('pdfs_course_create');
-
-                // upload and store video
-
+                // upload and (crud) pdf course
                 Route::post('file-upload/pdf/course', [PdfCourseController::class, 'uploadLargeFiles'])->name('upload_pdfs_course');
                 Route::post('store', [PdfCourseController::class,'store'])->name('pdfs_course_store');
-//
                 Route::get('show/{pdf_id}', [PdfCourseController::class,'show'])->name('pdfs_course_show');
                 Route::get('/change/status/{id}', [PdfCourseController::class,'changeStatus'])->name('change_status_pdfs_course');
                 Route::get('/force/delete/{id}', [PdfCourseController::class,'forceDelete'])->name('force_delete_pdfs_course');
             });
 
+
+            //pdfs videos
+            Route::group(['prefix'=>'video/pdfs'], function ()
+            {
+                Route::get('index/{video_id}', [PdfVideoController::class,'index'])->name('pdfs_video_index');
+                Route::get('create/{video_id}', [PdfVideoController::class,'create'])->name('pdfs_video_create');
+                // upload and (crud) pdf video
+                Route::post('file-upload/pdf/video', [PdfVideoController::class, 'uploadLargeFiles'])->name('upload_pdfs_video');
+                Route::post('store', [PdfVideoController::class,'store'])->name('pdfs_video_store');
+                Route::get('show/{pdf_id}', [PdfVideoController::class,'show'])->name('pdfs_video_show');
+                Route::get('/change/status/{id}', [PdfVideoController::class,'changeStatus'])->name('change_status_pdfs_video');
+                Route::get('/force/delete/{id}', [PdfVideoController::class,'forceDelete'])->name('force_delete_pdfs_video');
+            });
+
+
+
+            // students of teacher
+            Route::group(['prefix'=>'students'], function ()
+            {
+                Route::get('index', [StudentController::class,'index'])->name('students_index');
+                Route::get('create', [StudentController::class,'create'])->name('students_create');
+                Route::get('/change/status/{id}', [StudentController::class,'changeStatus'])->name('change_status_student');
+                Route::post('/store', [StudentController::class,'store'])->name('store_student');
+                Route::get('/force/delete/{id}', [StudentController::class,'forceDelete'])->name('force_delete_student');
+
+
+
+            });
 
         });
     });

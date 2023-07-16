@@ -40,6 +40,13 @@ class Course extends Model
         return $this->hasMany(PdfCourse::class,'course_id');
     }
 
+
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class,'student_courses','course_id','student_id');
+    }
+
     /*** end relations ***/
 
 

@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                     id="exampleModalLabel">
-                    حذف المدرس
+                    حذف الطالب
                 </h5>
                 <button type="button" class="close" data-dismiss="modal"
                         aria-label="Close">
@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('force_delete_teacher', $item->id) }}" method="get">
+                <form action="{{ route('force_delete_student', $item->id) }}" method="get">
                     @csrf
                     هل أنت متأكد من عملية الحذف ؟
                     <input id="id" type="hidden" name="id" class="form-control" value="{{ $item->id }}">

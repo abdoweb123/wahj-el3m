@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-     تعديل بيانات الكورس
+    عرض بيانات الكورس
 @stop
 
 @section('style')
@@ -35,42 +35,34 @@
             <div class="card card-statistics h-100">
                 <div class="card-body">
                     <div class="modal-body">
-                        <form action="{{ route('courses.update',$course->id) }}" method="post" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+                        <form action="#">
                             @csrf
-                            @method('PUT')
                             <div class="row">
                                 <div class="col">
                                     <label for="name_ar" class="mr-sm-2">الاسم: </label>
-                                    <input type="text" name="name" class="form-control" value="{{old('name',$course->name)}}" required>
+                                    <input type="text" name="name" class="form-control" value="{{old('name',$course->name)}}" required readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="name_ar" class="mr-sm-2">تاريخ الانتهاء: </label>
-                                    <input type="date" name="end_date" class="form-control" value="{{old('end_date',$course->end_date)}}" >
+                                    <input type="date" name="end_date" class="form-control" value="{{old('end_date',$course->end_date)}}" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label class="mr-sm-2">إمكانية التحميل: </label>
-                                    <select class="form-control mr-sm-2 p-2 mr-md-0" name="download">
-                                        <option class="custom-select mr-sm-2 p-2" value="2" {{$course->download == 2 ? 'selected' : ''}}>لا يمكن</option>
-                                        <option class="custom-select mr-sm-2 p-2" value="1" {{$course->download == 1 ? 'selected' : ''}}>يمكن</option>
-                                    </select>
+                                    <input type="text" name="end_date" class="form-control" value="{{$course->download == 1 ? 'يمكن' : 'لا يمكن'}}" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="name_ar" class="mr-sm-2">الوصف</label>
-                                    <textarea name="description" class="form-control" rows="6">{{old('description',$course->description)}}</textarea>
+                                    <textarea name="description" class="form-control" rows="6" readonly>{{old('description',$course->description)}}</textarea>
                                 </div>
                             </div>
 
                             <br><br>
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">تعديل</button>
-                            </div>
                         </form>
                     </div>
                 </div>

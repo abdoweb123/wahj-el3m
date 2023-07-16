@@ -103,28 +103,7 @@
                 }
             });
 
-
         });
-
-        // validation of the form
-        function validateForm() {
-
-            let normal_value = $('#normal').find(':selected').val();
-            let number_of_students = $('input[name="number_of_students"]').val();
-
-            if (normal_value == "2")
-            {
-                if (number_of_students == "")
-                {
-                    alert('برجاء إدخال عدد الطلاب')
-                    return false;
-                }
-            }
-            else{
-                $('#facebook_link_error').hide();
-            }
-
-        }
     </script>
 @stop
 

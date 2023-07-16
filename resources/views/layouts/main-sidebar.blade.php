@@ -49,6 +49,19 @@
                         </ul>
                     </li>
 
+                    @if(auth('teacher')->user()->type == 1 || auth('teacher')->user()->normal == 2)
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#students">
+                            <div class="pull-left"><i class="fas fa-users"></i><span class="right-nav-text">الطلاب</span>
+                            </div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="students" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{route('students_index')}}"><i class='fas fa-eye'></i>عرض الطلاب</a></li>
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>

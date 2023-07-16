@@ -4,30 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeachersTable extends Migration
+class CreateStudentsTable extends Migration
 {
-    /***  Run the migrations.  ***/
+    /***  Run the migrations. ***/
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->boolean('type'); // 1-supervisor  2-teacher
+            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->boolean('active')->default(1); // 1-active  2-inactive
-            $table->boolean('normal')->nullable(); // 1-normal  2-number_of_students
-            $table->integer('number_of_students')->nullable();
-            $table->integer('remain')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('teacher_id')->references('id')->on('teachers')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
 
-    /***  Reverse the migrations.  ***/
+
+    /***  Reverse the migrations. ***/
     public function down()
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('students');
     }
 }

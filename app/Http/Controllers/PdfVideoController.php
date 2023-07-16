@@ -2,34 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\PdfCourse;
+
+use App\Models\PdfVideo;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
-class PdfCourseController extends Controller
+class PdfVideoController extends Controller
 {
     /*** get videos ***/
-    public function index($course_id)
+    public function index($video_id)
     {
-        $pdfs_course = PdfCourse::query()->where('teacher_id',auth('teacher')->id())
-            ->where('course_id',$course_id)->latest()->paginate(page);
+        $pdfs_video = PdfVideo::query()->where('teacher_id',auth('teacher')->id())
+            ->where('video_id',$video_id)->latest()->paginate(page);
 
-        $course = Course::query()->findOrFail($course_id);
+        $video = Video::query()->findOrFail($video_id);
 
-        return view('pages.pdfs_course.index', compact('pdfs_course','course'));
+        return view('pages.pdfs_video.index', compact('pdfs_video','video'));
     }
 
 
 
     /*** create video ***/
-    public function create($course_id)
+    public function create($video_id)
     {
-        $course = Course::query()->findOrFail($course_id);
+        $video = Video::query()->findOrFail($video_id);
 
-        return view('pages.pdfs_course.create', compact('course'));
+        return view('pages.pdfs_video.create', compact('video'));
     }
 
 
@@ -48,15 +49,15 @@ class PdfCourseController extends Controller
         );
 
 
-        $pdfs_course = PdfCourse::query()->create([
+        $pdfs_video = PdfVideo::query()->create([
             'name' => $request->name,
             'active' => 1,
             'path' => $data['pdf'],
             'teacher_id' => auth('teacher')->id(),
-            'course_id' => $request->course_id,
+            'video_id' => $request->video_id,
         ]);
 
-        return redirect()->route('pdfs_course_index',$request->course_id)->with('alert-success','تم تحميل المستند بنجاح');
+        return redirect()->route('pdfs_video_index',$request->video_id)->with('alert-success','تم تحميل المستند بنجاح');
     }
 
 
@@ -65,9 +66,9 @@ class PdfCourseController extends Controller
     /*** show video ***/
     public function show($pdf_id)
     {
-        $pdfs_course = PdfCourse::query()->findOrFail($pdf_id);
+        $pdfs_video = PdfVideo::query()->findOrFail($pdf_id);
 
-        return response()->file(storage_path('/app/public/videos/'.$pdfs_course->path));
+        return response()->file(storage_path('/app/public/videos/'.$pdfs_video->path));
     }
 
 
@@ -75,12 +76,12 @@ class PdfCourseController extends Controller
     /*** forceDelete country ***/
     public function forceDelete($id)
     {
-        $pdfs_course = PdfCourse::query()->findOrFail($id);
+        $pdfs_video = PdfVideo::query()->findOrFail($id);
 
         // delete from folder
-        unlink(storage_path('/app/public/videos/'.$pdfs_course->path));
+        unlink(storage_path('/app/public/videos/'.$pdfs_video->path));
 
-        $pdfs_course->forceDelete();
+        $pdfs_video->forceDelete();
         return redirect()->back()->with('alert-danger','تم حذف البيانات بنجاح');
     }
 
@@ -89,15 +90,15 @@ class PdfCourseController extends Controller
     /*** change Status of video ***/
     public function changeStatus($id)
     {
-        $pdfs_course = PdfCourse::query()->where('id',$id)->first();
+        $pdfs_video = PdfVideo::query()->where('id',$id)->first();
 
-        if ($pdfs_course->active == 1)
+        if ($pdfs_video->active == 1)
         {
-            $pdfs_course->active = 2;
+            $pdfs_video->active = 2;
         }else{
-            $pdfs_course->active = 1;
+            $pdfs_video->active = 1;
         }
-        $pdfs_course->save();
+        $pdfs_video->save();
 
         return redirect()->back()->with('alert-info','تم تحديث البيانات بنجاح');
     }
