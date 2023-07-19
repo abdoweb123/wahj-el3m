@@ -8,6 +8,7 @@ use App\Http\Controllers\PdfVideoController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoHomeworkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -128,6 +129,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
                 Route::get('show/{pdf_id}', [PdfVideoController::class,'show'])->name('pdfs_video_show');
                 Route::get('/change/status/{id}', [PdfVideoController::class,'changeStatus'])->name('change_status_pdfs_video');
                 Route::get('/force/delete/{id}', [PdfVideoController::class,'forceDelete'])->name('force_delete_pdfs_video');
+            });
+
+
+
+            //pdfs videos
+            Route::group(['prefix'=>'video/homework'], function ()
+            {
+                Route::get('index/{video_id}', [VideoHomeworkController::class,'index'])->name('videoHomework_video_index');
+                Route::get('create/{video_id}', [VideoHomeworkController::class,'create'])->name('videoHomework_video_create');
+                Route::post('store', [VideoHomeworkController::class,'store'])->name('videoHomework_video_store');
+                Route::get('show/{id}', [VideoHomeworkController::class,'show'])->name('videoHomework_video_show');
+                Route::get('edit/{id}', [VideoHomeworkController::class,'edit'])->name('videoHomework_video_edit');
+                Route::post('update/{id}', [VideoHomeworkController::class,'update'])->name('videoHomework_video_update');
+                Route::get('/force/delete/{id}', [VideoHomeworkController::class,'forceDelete'])->name('force_delete_videoHomework_video');
             });
 
 

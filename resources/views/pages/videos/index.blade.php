@@ -112,6 +112,9 @@
                                         <a href="{{route('pdfs_video_index',$item->id)}}" class="process" style="cursor:pointer">
                                             <i style="color:#acabcb; font-size:18px;" class="fa fa-file-pdf-o"></i></a>
 
+                                        <a href="{{route('videoHomework_video_index',$item->id)}}" class="process" title="الواجبات" style="cursor:pointer">
+                                            <i style="color:#acabcb; font-size:18px;" class="fa fa-tasks"></i></a>
+
                                         <a type="button" class="process" style="cursor:pointer" data-toggle="modal"
                                            data-target="#delete{{ $item->id }}" title="{{ trans('main_trans.delete') }}">
                                             <i style="color:red; font-size:18px;" class="fa fa-trash"></i></a>

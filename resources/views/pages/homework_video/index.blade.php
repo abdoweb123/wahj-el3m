@@ -1,11 +1,14 @@
 @extends('layouts.master')
 
 @section('title')
-    قائمة الطلاب
+    قائمة الواجبات
 @stop
 
 @section('style')
+
+
 <style>
+    .process{border:none; border-radius:3px; padding:3px 5px;}
     select{padding:10px !important;}
     .process
     {
@@ -16,33 +19,29 @@
         padding: 5px 3px 0 4px;
         margin-left: 2px;
     }
-
-
 </style>
+
 @endsection
 
-@section('PageTitle')
-   قائمة الطلاب
-@stop
 
 @section('content')
     <!-- row -->
     <div class="row">
-        @if($teacher->type !== 1)
-            <div class="row w-100">
-                <div class="col">
-                    <h5 style="margin-right:20px; color:#1a1ac3; text-align: center">
-                        @if($teacher->remain == 0)
-                            <span> تم الوصول للحد الأقصى </span>
-                        @else
-                            <span> العدد المتبقي : </span>  <span> {{$teacher->remain}} </span>
-                        @endif
 
+        <div class="row w-100 justify-content-between">
+           <div class="col">
+               <h5 style="margin-right:20px; color:#1a1ac3;">
+                   <span> الكورسات </span> <span>/</span>  <span> الفيديوهات </span> <span>/</span>  <span> الواجبات </span>
+               </h5>
+           </div>
 
-                    </h5>
-                </div>
-            </div>
-        @endif
+            <div class="col">
+               <h5 style="margin-right:20px; color:#1a1ac3; text-align: end">
+                   <span> {{$video->name}} </span>
+               </h5>
+           </div>
+        </div>
+
         <div class="col-xl-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
@@ -66,12 +65,10 @@
                         @endif
                     @endforeach
 
-                    @if($teacher->type !== 1 && $teacher->remain > 0 || $teacher->type == 1)
-                        <a href="{{route('students_create')}}" class="button x-small">
-                            إضافة طالب
-                        </a>
-                    @endif
 
+                        <a href="{{route('videoHomework_video_create',$video->id)}}" class="button x-small">
+                            إضافة واجب
+                        </a>
                     <br><br>
 
                     <div class="table-responsive">
@@ -81,54 +78,47 @@
                             <tr>
                                 <th>#</th>
                                 <th>الاسم</th>
-                                <th>البريد الإلكتروني</th>
-                                <th>الحالة</th>
-                                <th>العمليات</th>
+                                <th>عرض المحتوى</th>
+                                <th>الإجراءات</th>
                             </tr>
                             </thead>
                             <tbody>
-                             @foreach ($students as $item)
+                            @foreach ($homework_video as $item)
                                 <tr>
+
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>@if($item->active == 1)
-                                            <a class="btn btn-primary" href="{{route('change_status_student',$item->id)}}">نشط</a>
-                                        @else
-                                            <a class="btn btn-danger" href="{{route('change_status_student',$item->id)}}">غير نشط</a>
-                                        @endif
+                                    <td>
+                                        <a href="{{route('videoHomework_video_show',$item->id)}}" class="process" style="cursor:pointer">
+                                            <i style="color:#094609; font-size:18px;" class="fa fa-eye"></i></a>
                                     </td>
+{{--                                    <td>@isset($item->admin->name)  {{ $item->admin->name }} @else _____  @endisset</td>--}}
+
 
                                     <td>
-{{--                                        <a type="button" class="process" href="{{route('show_teacher_data',$item->id)}}">--}}
-{{--                                            <i style="color:green; font-size:18px;" class="fa fa-eye"></i></a>--}}
+
+                                        <a href="{{route('videoHomework_video_edit',$item->id)}}" class="process" style="cursor:pointer">
+                                            <i style="color:green; font-size:18px;" class="fa fa-edit"></i></a>
 
                                         <a type="button" class="process" style="cursor:pointer" data-toggle="modal"
-                                           data-target="#delete{{ $item->id }}">
+                                           data-target="#delete{{ $item->id }}" title="{{ trans('main_trans.delete') }}">
                                             <i style="color:red; font-size:18px;" class="fa fa-trash"></i></a>
                                     </td>
+
                                 </tr>
 
-                                <!--  page of edit_modal_employee -->
-{{--                                @include('pages.Drivers.edit')--}}
+                                <!--  page of delete_modal_city -->
+                                @include('pages.homework_video.delete')
 
-                                <!--  page of delete_modal_employee -->
-                                @include('pages.students.delete')
 
                             @endforeach
                         </table>
 
-                        <div> {{$students->links('pagination::bootstrap-4')}}</div>
-
-
+                        <div> {{$homework_video->links('pagination::bootstrap-4')}}</div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-       <!--  page of add_modal_employee -->
-{{--       @include('pages.Drivers.create')--}}
     </div>
 
 
@@ -140,10 +130,30 @@
 
     <script>
         $(document).ready(function(){
-            $(".messages").delay(5000).slideUp(300);
+            $(".alert").delay(5000).slideUp(300);
         });
+
+
+
+        $('.copy_link').click(function (){
+
+            var copyText = $(this).parent().children(':first').prop('innerText');
+
+            navigator.clipboard.writeText(copyText);
+
+            // show copied
+            $(this).next().css('visibility','visible');
+            setTimeout(function (){
+                $('.say_copied').css('visibility','hidden');
+            },2000);
+        });
+
+
+
+
     </script>
 @endsection
+
 
 
 
